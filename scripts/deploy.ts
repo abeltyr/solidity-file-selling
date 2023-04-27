@@ -11,7 +11,14 @@ export async function deployNft(): Promise<Nft> {
 }
 
 async function main() {
-  await deployNft();
+  //deploy Simplecoin
+  const Contract = await ethers.getContractFactory("Nft");
+  console.log("Deploying contract...");
+  const contract = await Contract.deploy();
+  await contract.deployed();
+  console.log("contract deployed to:", contract.address);
+
+  // await deployNft();
 }
 
 // We recommend this pattern to be able to use async/await everywhere

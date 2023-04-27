@@ -1,4 +1,5 @@
-import { ethers } from "hardhat";
+import { ethers, network } from "hardhat";
+const fa = require("@glif/filecoin-address");
 
 const nftAddress = "0xA15BB66138824a1c7167f5E85b957d04Dd34E468";
 
@@ -8,33 +9,18 @@ async function getNetworkTimestamp() {
 }
 
 export async function main() {
-  const accounts = await ethers.getSigners();
-  const seller = accounts[0];
+  //create new Wallet object from private key
+  const DEPLOYER_PRIVATE_KEY: any = network.config.accounts;
 
-  const Nft = await ethers.getContractFactory("Nft");
-  const nft = Nft.attach(nftAddress);
-  // const sellerNft = nft.connect(seller);
+  const deployer = new ethers.Wallet(DEPLOYER_PRIVATE_KEY[0]);
 
-  const res = await (await nft.mint("id", "key", "cid")).wait();
-
-  console.log(res);
-  const key = await await nft.fetchKey(0);
-  const cid = await await nft.fetchCid(0);
-  const room = await await nft.fetchToken(0);
-
-  console.log({ key, cid, room });
-  // const txRcpt = await (
-  //   await sellerNftMarketFixedPrice.list(
-  //     nft.address,
-  //     tokenId,
-  //     233,
-  //     (await getNetworkTimestamp()) + 3600 * 24 * 1,
-  //     (await getNetworkTimestamp()) + 3600 * 24 * 2
-  //   )
-  // ).wait();
-  // const listEvent = txRcpt.events?.find((ev) => ev.event == "List");
-  // const listingId = listEvent?.args?.listingId;
-  // console.log({ listingId });
+  //Convert Ethereum address to f4 address
+  const f4Address = fa.newDelegatedEthAddress(deployer.address).toString();
+  console.log(
+    "Ethereum address (this addresss should work for most tools):",
+    deployer.address,
+  );
+  console.log("f4address (also known as t4 address on testnets):", f4Address);
 }
 
 main();

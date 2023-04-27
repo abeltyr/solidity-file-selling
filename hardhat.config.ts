@@ -12,18 +12,40 @@ import "solidity-coverage";
 dotenv.config();
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.18",
+  solidity: {
+    version: "0.8.18",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 1000,
+        details: { yul: false },
+      },
+    },
+  },
+  defaultNetwork: "Hyperspace",
   networks: {
     localhost: {
       url: process.env.LOCALHOST_URL || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    // sepolia: {
-    //   url: process.env.SEPOLIA_URL || "",
-    //   accounts:
-    //     process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
-    // },
+    sepolia: {
+      url: process.env.SEPOLIA_URL || "",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    Localnet: {
+      chainId: 31415926,
+      url: "http://127.0.0.1:1234/rpc/v1",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    Hyperspace: {
+      // chainId: 3141,
+      url: "https://api.hyperspace.node.glif.io/rpc/v1",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS !== undefined,
@@ -31,6 +53,12 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  paths: {
+    sources: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
   },
 };
 

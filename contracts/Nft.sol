@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.18;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "./RoomToken.sol";
+import "./RoomTokenShare.sol";
 
-contract Nft is ERC721, Ownable, RoomToken {
+contract Nft is Ownable, RoomTokenShare {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     string public baseURI;
@@ -28,7 +28,8 @@ contract Nft is ERC721, Ownable, RoomToken {
     function mint(
         string memory id,
         string memory key,
-        string memory cid
+        string memory cid,
+        uint256 price
     ) public returns (RoomToken memory) {
         // Todo check the give signature match and if the user is allowed to mint
 
@@ -36,7 +37,15 @@ contract Nft is ERC721, Ownable, RoomToken {
 
         _safeMint(msg.sender, newItemId);
 
-        RoomToken memory token = createToken(id, newItemId, key, cid);
+        bool inPlatformSell = price > 0;
+        RoomToken memory token = createToken(
+            id,
+            newItemId,
+            key,
+            cid,
+            price,
+            inPlatformSell
+        );
 
         _tokenIds.increment();
 

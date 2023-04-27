@@ -8,13 +8,15 @@
     "build": "hardhat compile",
     "serve": "hardhat node",
     "export": "hardhat run scripts/export.ts",
-    "deploy": "hardhat run scripts/deploy.ts --network sepolia",
-    "verify": "hardhat verify --network sepolia 0x67b14bEC64Ec88e896Ba0eCbbE0E1fD269B2F107",
-    "deploy:local": "hardhat run scripts/deploy.ts --network localhost"
+    "deploy": "hardhat run scripts/deploy.ts",
+    "verify": "hardhat verify --network Hyperspace 0xC79372D53E1B2D304deeB19Af783f435e8339881",
+    "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
+    "getAddress": "hardhat run scripts/testing.ts"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
     "@ethersproject/providers": "^5.4.7",
+    "@glif/filecoin-address": "^2.0.43",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.2;
+pragma solidity ^0.8.18;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -19,6 +19,10 @@ interface IRoomToken {
         address owner;
         /// @notice Date of the token mint
         uint256 creationDate;
+        /// @notice price of the token.
+        uint256 price;
+        /// @notice allow token share sale.
+        bool inPlatformSell;
     }
 
     /// @dev Emitted on new Room.
@@ -27,17 +31,20 @@ interface IRoomToken {
         uint256 tokenId,
         string cid,
         address owner,
-        uint256 creationDate
+        uint256 creationDate,
+        uint256 price,
+        bool inPlatformSell
     );
 
     /// @notice fetch a room data by the mint id
-    function fetchToken(
-        uint256 tokenId
-    ) external view returns (RoomToken memory);
+    function getToken(uint256 tokenId) external view returns (RoomToken memory);
 
     /// @notice fetch a room key by the mint id
-    function fetchKey(uint256 tokenId) external view returns (string memory);
+    function tokenKey(uint256 tokenId) external view returns (string memory);
 
-    /// @notice fetch a room cid by the mint id
-    function fetchCid(uint256 tokenId) external view returns (string memory);
+    /// @notice fetch a room token price by the mint id
+    function tokenPrice(uint256 tokenId) external view returns (uint256);
+
+    /// @notice fetch a room token price by the mint id
+    function tokenSelling(uint256 tokenId) external view returns (bool);
 }
