@@ -6,7 +6,7 @@ import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import "hardhat-jest-plugin";
-import { HardhatUserConfig, task } from "hardhat/config";
+import { HardhatUserConfig } from "hardhat/config";
 import "solidity-coverage";
 
 dotenv.config();
@@ -22,7 +22,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "Hyperspace",
+  defaultNetwork: "hyperspace",
   networks: {
     localhost: {
       url: process.env.LOCALHOST_URL || "",
@@ -40,8 +40,8 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    Hyperspace: {
-      // chainId: 3141,
+    hyperspace: {
+      chainId: 3141,
       url: "https://api.hyperspace.node.glif.io/rpc/v1",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
@@ -52,7 +52,20 @@ const config: HardhatUserConfig = {
     currency: "USD",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      mainnet: process.env.ETHERSCAN_API_KEY!,
+      hyperspace: process.env.ETHERSCAN_API_KEY!,
+    },
+    customChains: [
+      {
+        network: "hyperspace",
+        chainId: 3141,
+        urls: {
+          apiURL: "https://api.hyperspace.node.glif.io/rpc/v1",
+          browserURL: "https://hyperspace.filfox.info/en",
+        },
+      },
+    ],
   },
   paths: {
     sources: "./contracts",

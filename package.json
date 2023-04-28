@@ -9,9 +9,9 @@
     "serve": "hardhat node",
     "export": "hardhat run scripts/export.ts",
     "deploy": "hardhat run scripts/deploy.ts",
-    "verify": "hardhat verify --network Hyperspace 0xC79372D53E1B2D304deeB19Af783f435e8339881",
+    "verify": "hardhat verify --network hyperspace 0x5aAeE8138397D1c4743dC3b4c6B7A78A11615a08",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
-    "getAddress": "hardhat run scripts/testing.ts"
+    "getAddress": "hardhat run scripts/getAddress.ts"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

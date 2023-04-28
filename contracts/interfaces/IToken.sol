@@ -5,8 +5,8 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title Listing market
-interface IRoomToken {
-    struct RoomToken {
+interface IToken {
+    struct Token {
         /// @notice A unique id to identify the room.
         string id;
         /// @notice the mint token number
@@ -36,15 +36,9 @@ interface IRoomToken {
         bool inPlatformSell
     );
 
-    /// @notice fetch a room data by the mint id
-    function getToken(uint256 tokenId) external view returns (RoomToken memory);
-
-    /// @notice fetch a room key by the mint id
-    function tokenKey(uint256 tokenId) external view returns (string memory);
-
-    /// @notice fetch a room token price by the mint id
+    /// @notice fetch a token token price by the mint id
     function tokenPrice(uint256 tokenId) external view returns (uint256);
 
-    /// @notice fetch a room token price by the mint id
+    /// @notice fetch a token token price by the mint id
     function tokenSelling(uint256 tokenId) external view returns (bool);
 }
