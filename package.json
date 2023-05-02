@@ -9,12 +9,13 @@
     "serve": "hardhat node",
     "export": "hardhat run scripts/export.ts",
     "deploy": "hardhat run scripts/deploy.ts",
-    "verify": "hardhat verify --network hyperspace 0x5aAeE8138397D1c4743dC3b4c6B7A78A11615a08",
+    "verify": "hardhat verify 0x5B17dEcd6b7218Bb77E0af923A02640adab61dB5",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
     "getAddress": "hardhat run scripts/getAddress.ts"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
+    "@ethersproject/hash": "^5.7.0",
     "@ethersproject/providers": "^5.4.7",
     "@glif/filecoin-address": "^2.0.43",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.0",
@@ -28,6 +29,7 @@
     "@typechain/ethers-v5": "^10.1.0",
     "@typechain/hardhat": "^6.1.2",
     "@types/chai": "^4.2.0",
+    "@types/fs-extra": "^11.0.1",
     "@types/mocha": ">=9.1.0",
     "@types/node": ">=12.0.0",
     "chai": "^4.2.0",

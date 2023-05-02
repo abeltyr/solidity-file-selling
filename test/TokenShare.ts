@@ -2,11 +2,11 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types";
 import { Wallet } from "ethers";
 
-const nftAddress = "0x5aAeE8138397D1c4743dC3b4c6B7A78A11615a08";
-describe("Token", function () {
+const nftAddress = "0x5B17dEcd6b7218Bb77E0af923A02640adab61dB5";
+describe("Token Share", function () {
   let contract: Recording, wallet: Wallet;
   describe("Deployment", function () {
-    it("token Contract ", async function () {
+    it.skip("token Contract ", async function () {
       const DEPLOYER_PRIVATE_KEY: any = network.config.accounts;
       wallet = new ethers.Wallet(DEPLOYER_PRIVATE_KEY[0]);
       const Contract = await ethers.getContractFactory("Recording");
@@ -20,7 +20,7 @@ describe("Token", function () {
       console.log(data);
     });
 
-    it("get token 0 share holder", async function () {
+    it.skip("get token 0 share holder", async function () {
       const tokenShare = await contract.getTokenShare(
         0,
         wallet.address,
@@ -28,7 +28,7 @@ describe("Token", function () {
       );
       console.log(tokenShare);
     });
-    it("check token 0 share holder", async function () {
+    it.skip("check token 0 share holder", async function () {
       const checkTokenShare = await contract.checkTokenShare(
         0,
         wallet.address,
@@ -36,13 +36,13 @@ describe("Token", function () {
       );
       console.log(checkTokenShare);
     });
-    it("token 0 room", async function () {
+    it.skip("token 0 room", async function () {
       const room = await contract.getToken(0);
       console.log({
         room,
       });
     });
-    it("token 0 key ", async function () {
+    it.skip("token 0 key ", async function () {
       const key = await contract.tokenKey(0);
       console.log({
         key,

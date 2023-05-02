@@ -2,8 +2,8 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types";
 import { Wallet } from "ethers";
 
-const nftAddress = "0x5aAeE8138397D1c4743dC3b4c6B7A78A11615a08";
-describe("Token", function () {
+const nftAddress = "0x5B17dEcd6b7218Bb77E0af923A02640adab61dB5";
+describe("Token Relation", function () {
   let contract: Recording, wallet: Wallet;
   describe("Deployment", function () {
     it.skip("token Contract ", async function () {

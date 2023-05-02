@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title Listing market
+/// @title Token
 interface IToken {
     struct Token {
         /// @notice A unique id to identify the room.

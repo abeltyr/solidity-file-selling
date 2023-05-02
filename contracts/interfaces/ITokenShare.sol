@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IToken.sol";
 
-/// @title Listing market
+/// @title Token Share
 interface ITokenShare is IToken {
     struct TokenShareHolder {
         /// @notice The owner of the token.

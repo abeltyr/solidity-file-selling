@@ -4,7 +4,7 @@ pragma solidity ^0.8.18;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title Listing market
+/// @title Token Relation
 interface ITokenRelation {
     struct TokenRelation {
         /// @notice the mint token number

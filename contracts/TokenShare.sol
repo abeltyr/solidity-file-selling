@@ -2,7 +2,6 @@
 pragma solidity ^0.8.18;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./interfaces/ITokenShare.sol";
 import "./Token.sol";
@@ -116,6 +115,11 @@ abstract contract TokenShare is ITokenShare, Token {
         uint256 tokenId
     ) external view override returns (string memory) {
         _requireMinted(tokenId);
+
+        // Todo: create account list to be able to fetch those data
+
+        // Todo: setup signature verification to get the requester is wallet address
+
         Token memory _token = fetchToken(tokenId);
         TokenShareHolder memory _tokenShareHolder = _tokenShareHolders[tokenId][
             msg.sender
