@@ -57,9 +57,9 @@ abstract contract TokenRelation is ITokenRelation {
      * @dev Throws if the id is already being used.
      */
     function _checkRecordingId(string memory id) internal view virtual {
-        TokenRelation memory _recordingToken = fetchRecordingToken(id);
+        TokenRelation memory _recordToken = _recordTokens[id];
         require(
-            !_recordingToken.used,
+            !_recordToken.used,
             "Recording Token: the id given is already being used"
         );
     }

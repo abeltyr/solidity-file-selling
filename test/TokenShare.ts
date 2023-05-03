@@ -2,11 +2,11 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types";
 import { Wallet } from "ethers";
 
-const nftAddress = "0x5B17dEcd6b7218Bb77E0af923A02640adab61dB5";
+const nftAddress = "0xDcC78D130d778b9BaeDb5ff5f9cA03bCCc3683A7";
 describe("Token Share", function () {
   let contract: Recording, wallet: Wallet;
   describe("Deployment", function () {
-    it.skip("token Contract ", async function () {
+    it("token Contract ", async function () {
       const DEPLOYER_PRIVATE_KEY: any = network.config.accounts;
       wallet = new ethers.Wallet(DEPLOYER_PRIVATE_KEY[0]);
       const Contract = await ethers.getContractFactory("Recording");
@@ -36,13 +36,13 @@ describe("Token Share", function () {
       );
       console.log(checkTokenShare);
     });
-    it.skip("token 0 room", async function () {
+    it("token 0 room", async function () {
       const room = await contract.getToken(0);
       console.log({
         room,
       });
     });
-    it.skip("token 0 key ", async function () {
+    it("token 0 key ", async function () {
       const key = await contract.tokenKey(0);
       console.log({
         key,

@@ -22,7 +22,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "hyperspace",
+  defaultNetwork: "bsc",
   networks: {
     localhost: {
       url: process.env.LOCALHOST_URL || "",
@@ -34,9 +34,9 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    Localnet: {
-      chainId: 31415926,
-      url: "http://127.0.0.1:1234/rpc/v1",
+    bsc: {
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545",
+      chainId: 97,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
@@ -54,7 +54,8 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       mainnet: process.env.ETHERSCAN_API_KEY!,
-      hyperspace: process.env.ETHERSCAN_API_KEY!,
+      sepolia: process.env.ETHERSCAN_API_KEY!,
+      bscTestnet: process.env.BSC_SCAN_API_KEY!,
     },
     customChains: [
       {

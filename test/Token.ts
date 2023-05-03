@@ -1,9 +1,8 @@
 import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types/";
-import { Recording__factory } from "../typechain-types/factories/contracts";
 import { hashMessage } from "@ethersproject/hash";
 
-const nftAddress = "0x5B17dEcd6b7218Bb77E0af923A02640adab61dB5";
+const nftAddress = "0xDcC78D130d778b9BaeDb5ff5f9cA03bCCc3683A7";
 describe("Token", function () {
   let contract: Recording,
     wallet: any,
@@ -27,7 +26,7 @@ describe("Token", function () {
       vSignature = parseInt(signature.slice(130, 132), 16);
     });
 
-    it("mint 1", async function () {
+    it.skip("mint 1", async function () {
       let price = ethers.utils.parseEther("2.0");
       const data = await contract.mint(
         "3",
@@ -41,19 +40,19 @@ describe("Token", function () {
       );
       console.log(data);
     });
-    it.skip("token 0 cid ", async function () {
+    it("token 0 cid ", async function () {
       const cid = await contract.tokenURI(0);
 
       console.log({
         cid,
       });
     });
-    it.skip("token 0 price", async function () {
+    it("token 0 price", async function () {
       const price = await contract.tokenPrice(0);
 
       console.log({ price });
     });
-    it.skip("token 0 sellingAccess", async function () {
+    it("token 0 sellingAccess", async function () {
       const sellingAccess = await contract.tokenSelling(0);
       console.log({ sellingAccess });
     });

@@ -19,29 +19,29 @@ abstract contract Token is IToken, ERC721, Ownable, TokenRelation {
         bool inPlatformSell
     ) internal returns (Token memory) {
         uint256 _startDate = block.timestamp;
-        address _owner = msg.sender;
 
         Token memory _token = Token({
             id: id,
             tokenId: tokenId,
             key: key,
             cid: cid,
-            owner: _owner,
+            owner: msg.sender,
             creationDate: _startDate,
             price: price,
             inPlatformSell: inPlatformSell
         });
         _tokens[tokenId] = _token;
         createRecordingToken(id, tokenId);
-        emit Room(
-            _token.id,
-            _token.tokenId,
-            _token.cid,
-            _token.owner,
-            _token.creationDate,
-            _token.price,
-            _token.inPlatformSell
-        );
+
+        emit Room({
+            id: _token.id,
+            tokenId: _token.tokenId,
+            cid: _token.cid,
+            owner: _token.owner,
+            creationDate: _token.creationDate,
+            price: _token.price,
+            inPlatformSell: _token.inPlatformSell
+        });
 
         return _token;
     }

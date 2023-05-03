@@ -16,6 +16,10 @@ abstract contract TokenShare is ITokenShare, Token {
         uint256 tokenId,
         address shareHolder
     ) external view returns (bool) {
+        require(
+            address(0) != shareHolder,
+            "Token Share: address is invalid one"
+        );
         _requireMinted(tokenId);
         TokenShareHolder memory _tokenShareHolder = _tokenShareHolders[tokenId][
             shareHolder
@@ -29,6 +33,10 @@ abstract contract TokenShare is ITokenShare, Token {
         uint256 tokenId,
         address shareHolder
     ) external view returns (TokenShareHolder memory) {
+        require(
+            address(0) != shareHolder,
+            "Token Share: address is invalid one"
+        );
         _requireMinted(tokenId);
         TokenShareHolder memory _tokenShareHolder = _tokenShareHolders[tokenId][
             shareHolder
@@ -115,10 +123,6 @@ abstract contract TokenShare is ITokenShare, Token {
         uint256 tokenId
     ) external view override returns (string memory) {
         _requireMinted(tokenId);
-
-        // Todo: create account list to be able to fetch those data
-
-        // Todo: setup signature verification to get the requester is wallet address
 
         Token memory _token = fetchToken(tokenId);
         TokenShareHolder memory _tokenShareHolder = _tokenShareHolders[tokenId][
