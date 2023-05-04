@@ -5,7 +5,7 @@ import hre from "@nomiclabs/hardhat-etherscan";
 async function main() {
   // Verify the contract after deploying
   await hardhat.run("verify:verify", {
-    address: "0xDcC78D130d778b9BaeDb5ff5f9cA03bCCc3683A7",
+    address: "0x68BE38A1844F8De928f535A7D2f6420d97c8ceAf",
     constructorArguments: [],
   });
 }

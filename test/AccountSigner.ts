@@ -2,7 +2,7 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types";
 import { Wallet } from "ethers";
 
-const nftAddress = "0xDcC78D130d778b9BaeDb5ff5f9cA03bCCc3683A7";
+const nftAddress = "0x68BE38A1844F8De928f535A7D2f6420d97c8ceAf";
 describe("Account Signer", function () {
   let contract: Recording, wallet: Wallet;
   describe("Deployment", function () {

@@ -55,14 +55,17 @@ abstract contract TokenShare is ITokenShare, Token {
     ) external payable returns (Token memory, TokenShareHolder memory) {
         _requireMinted(tokenId);
 
-        Token memory _roomToken = fetchToken(tokenId);
+        Token memory _token = fetchToken(tokenId);
+
         require(
-            msg.value == _roomToken.price,
+            msg.value == _token.price,
             "TokenShare: The provided fund doesn't match"
         );
+        require(_token.onSell, "Token: token is not for sell");
+
         address shareHolder = msg.sender;
         require(
-            shareHolder != _roomToken.owner,
+            shareHolder != _token.owner,
             "TokenShare: owner of the token can't buy the shares"
         );
 
@@ -75,7 +78,7 @@ abstract contract TokenShare is ITokenShare, Token {
             "TokenShare: you already have access to the token"
         );
 
-        (bool success, ) = payable(_roomToken.owner).call{value: msg.value}("");
+        (bool success, ) = payable(_token.owner).call{value: msg.value}("");
         require(success, "Transfer: fund transfer failed");
 
         uint256 buyingDate = block.timestamp;
@@ -89,12 +92,12 @@ abstract contract TokenShare is ITokenShare, Token {
 
         emit TokenShared({
             shareHolder: _tokenShareHolder.shareHolder,
-            tokenOwner: _roomToken.owner,
-            tokenId: _roomToken.tokenId,
+            tokenOwner: _token.owner,
+            tokenId: _token.tokenId,
             buyingPrice: msg.value
         });
 
-        return (_roomToken, _tokenShareHolder);
+        return (_token, _tokenShareHolder);
     }
 
     /// @notice Fetch the  token.

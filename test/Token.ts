@@ -2,7 +2,7 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types/";
 import { hashMessage } from "@ethersproject/hash";
 
-const nftAddress = "0xDcC78D130d778b9BaeDb5ff5f9cA03bCCc3683A7";
+const nftAddress = "0x68BE38A1844F8De928f535A7D2f6420d97c8ceAf";
 describe("Token", function () {
   let contract: Recording,
     wallet: any,
@@ -38,6 +38,10 @@ describe("Token", function () {
         rSignature,
         sSignature,
       );
+      console.log(data);
+    });
+    it.skip("update token bool", async function () {
+      const data = await contract.updateTokenSell(0, true);
       console.log(data);
     });
     it("token 0 cid ", async function () {

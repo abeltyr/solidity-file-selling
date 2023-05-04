@@ -15,8 +15,7 @@ abstract contract Token is IToken, ERC721, Ownable, TokenRelation {
         uint256 tokenId,
         string memory key,
         string memory cid,
-        uint256 price,
-        bool inPlatformSell
+        uint256 price
     ) internal returns (Token memory) {
         uint256 _startDate = block.timestamp;
 
@@ -28,7 +27,7 @@ abstract contract Token is IToken, ERC721, Ownable, TokenRelation {
             owner: msg.sender,
             creationDate: _startDate,
             price: price,
-            inPlatformSell: inPlatformSell
+            onSell: true
         });
         _tokens[tokenId] = _token;
         createRecordingToken(id, tokenId);
@@ -40,7 +39,7 @@ abstract contract Token is IToken, ERC721, Ownable, TokenRelation {
             owner: _token.owner,
             creationDate: _token.creationDate,
             price: _token.price,
-            inPlatformSell: _token.inPlatformSell
+            onSell: _token.onSell
         });
 
         return _token;
@@ -70,6 +69,20 @@ abstract contract Token is IToken, ERC721, Ownable, TokenRelation {
     ) external view override returns (bool) {
         _requireMinted(tokenId);
         Token memory _token = _tokens[tokenId];
-        return _token.inPlatformSell;
+        return _token.onSell;
+    }
+
+    /// @notice update token sell
+    /// @param tokenId The mint id used for the Token association.
+    function updateTokenSell(uint256 tokenId, bool onSell) external {
+        _requireMinted(tokenId);
+        Token memory _fetchedToken = _tokens[tokenId];
+        require(
+            owner() == msg.sender || _fetchedToken.owner == msg.sender,
+            "Token: only owner can update sell"
+        );
+
+        _fetchedToken.onSell = onSell;
+        _tokens[tokenId] = _fetchedToken;
     }
 }

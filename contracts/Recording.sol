@@ -48,17 +48,8 @@ contract Recording is TokenShare, AccountSigners {
 
         _safeMint(msg.sender, newItemId);
 
-        bool inPlatformSell = price > 0;
-
         // create token data for the mint token id
-        Token memory token = createToken(
-            id,
-            newItemId,
-            key,
-            cid,
-            price,
-            inPlatformSell
-        );
+        Token memory token = createToken(id, newItemId, key, cid, price);
 
         _tokenIds.increment();
 

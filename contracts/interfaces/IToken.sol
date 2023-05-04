@@ -21,8 +21,8 @@ interface IToken {
         uint256 creationDate;
         /// @notice price of the token.
         uint256 price;
-        /// @notice allow token share sale.
-        bool inPlatformSell;
+        /// @notice can the token be sell.
+        bool onSell;
     }
 
     /// @dev Emitted on new Room.
@@ -33,7 +33,7 @@ interface IToken {
         address owner,
         uint256 creationDate,
         uint256 price,
-        bool inPlatformSell
+        bool onSell
     );
 
     /// @notice fetch a token token price by the mint id
