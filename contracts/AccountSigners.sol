@@ -8,7 +8,7 @@ abstract contract AccountSigners is IAccountSigners, Ownable {
     mapping(address => AccountSigners) private _accountSigners;
 
     /**
-     * @dev Throws if the sender is not the owner.
+     * @dev Throws if the sender is not the part of the signers.
      */
     function _checkAccountAccess() internal view virtual {
         AccountSigners memory _accountSigner = _accountSigners[msg.sender];
@@ -16,6 +16,14 @@ abstract contract AccountSigners is IAccountSigners, Ownable {
             owner() == msg.sender || _accountSigner.accepted,
             "AccountSigners: account isn't a signer"
         );
+    }
+
+    function hasAccountAccess(
+        address signerAddress
+    ) external view override returns (bool) {
+        _checkAccountAccess();
+        AccountSigners memory _accountSigner = _accountSigners[signerAddress];
+        return _accountSigner.accepted;
     }
 
     /// @notice Fetch the room token selling allowed status.
@@ -32,7 +40,9 @@ abstract contract AccountSigners is IAccountSigners, Ownable {
         address signer = ecrecover(_hashedMessage, _v, _r, _s);
         AccountSigners memory _accountSigner = _accountSigners[signer];
         require(
-            _accountSigner.accepted || owner() == msg.sender,
+            _accountSigner.accepted ||
+                owner() == msg.sender ||
+                owner() == signer,
             "AccountSigners: The give signature is an invalid one"
         );
     }

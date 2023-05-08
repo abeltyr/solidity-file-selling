@@ -16,4 +16,9 @@ interface IAccountSigners {
 
     /// @notice Remove account from signers
     function removeAccountSigner(address signerAddress) external;
+
+    /// @notice does address have access
+    function hasAccountAccess(
+        address signerAddress
+    ) external view returns (bool);
 }

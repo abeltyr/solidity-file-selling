@@ -22,7 +22,7 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "hyperspace",
+  defaultNetwork: "bsc",
   networks: {
     localhost: {
       url: process.env.LOCALHOST_URL || "",

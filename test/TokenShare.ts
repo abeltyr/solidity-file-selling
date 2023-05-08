@@ -2,7 +2,9 @@ import { ethers, network } from "hardhat";
 import { Recording } from "../typechain-types";
 import { Wallet } from "ethers";
 
-const nftAddress = "0x68BE38A1844F8De928f535A7D2f6420d97c8ceAf";
+const nftAddress = "0xae6644a9B0419b4cD3127Cf9994Dc349d29B536b";
+// "0x44FD9290A3dd405436cEaa6249b4CA7aE8852DA7";
+
 describe("Token Share", function () {
   let contract: Recording, wallet: Wallet;
   describe("Deployment", function () {
@@ -36,13 +38,13 @@ describe("Token Share", function () {
       );
       console.log(checkTokenShare);
     });
-    it("token 0 room", async function () {
+    it.skip("token 0 room", async function () {
       const room = await contract.getToken(0);
       console.log({
         room,
       });
     });
-    it("token 0 key ", async function () {
+    it.skip("token 0 key ", async function () {
       const key = await contract.tokenKey(0);
       console.log({
         key,

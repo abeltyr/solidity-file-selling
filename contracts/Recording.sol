@@ -6,7 +6,7 @@ import "./AccountSigners.sol";
 
 contract Recording is TokenShare, AccountSigners {
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    Counters.Counter public _tokenIds;
     string public baseURI;
 
     event BaseURIUpdated(string uri);
@@ -34,8 +34,16 @@ contract Recording is TokenShare, AccountSigners {
         bytes32 _s
     ) public returns (Token memory) {
         // check if the id has been used
-        _checkRecordingId(id);
+        TokenRelation memory _tokenRelation = fetchRecordingToken(id);
 
+        if (_tokenRelation.used) {
+            Token memory _token = fetchToken(_tokenRelation.tokenId);
+            if (_token.owner == msg.sender) {
+                return _token;
+            } else {
+                revert("Token: The given id is invalid");
+            }
+        }
         // check if the requester has access to mint by checking the signers message
         _verifySignature({
             _hashedMessage: _hashedMessage,
