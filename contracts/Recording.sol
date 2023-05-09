@@ -6,7 +6,7 @@ import "./AccountSigners.sol";
 
 contract Recording is TokenShare, AccountSigners {
     using Counters for Counters.Counter;
-    Counters.Counter public _tokenIds;
+    Counters.Counter private _tokenIds;
     string public baseURI;
 
     event BaseURIUpdated(string uri);

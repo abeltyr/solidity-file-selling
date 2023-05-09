@@ -22,27 +22,34 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "bsc",
+  defaultNetwork: process.env.CHAIN,
   networks: {
     localhost: {
       url: process.env.LOCALHOST_URL || "",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    sepolia: {
-      url: process.env.SEPOLIA_URL || "",
+    hyperspace: {
+      chainId: 3141,
+      url: "https://filecoin-hyperspace.chainstacklabs.com/rpc/v1",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    bsc: {
+    TBSC: {
       url: "https://data-seed-prebsc-1-s1.binance.org:8545",
       chainId: 97,
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    hyperspace: {
-      chainId: 3141,
-      url: "https://api.hyperspace.node.glif.io/rpc/v1",
+    AGOR: {
+      chainId: 421613,
+      url: "https://goerli-rollup.arbitrum.io/rpc",
+      accounts:
+        process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
+    },
+    TOKT: {
+      chainId: 65,
+      url: "https://exchaintestrpc.okex.org",
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
@@ -62,7 +69,7 @@ const config: HardhatUserConfig = {
         network: "hyperspace",
         chainId: 3141,
         urls: {
-          apiURL: "https://api.hyperspace.node.glif.io/rpc/v1",
+          apiURL: "https://filecoin-hyperspace.chainstacklabs.com/rpc/v1",
           browserURL: "https://hyperspace.filfox.info/en",
         },
       },
