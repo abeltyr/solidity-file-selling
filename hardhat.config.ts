@@ -29,7 +29,7 @@ const config: HardhatUserConfig = {
       accounts:
         process.env.PRIVATE_KEY !== undefined ? [process.env.PRIVATE_KEY] : [],
     },
-    hyperspace: {
+    TFIL: {
       chainId: 3141,
       url: "https://filecoin-hyperspace.chainstacklabs.com/rpc/v1",
       accounts:
@@ -66,7 +66,7 @@ const config: HardhatUserConfig = {
     },
     customChains: [
       {
-        network: "hyperspace",
+        network: "TFIL",
         chainId: 3141,
         urls: {
           apiURL: "https://filecoin-hyperspace.chainstacklabs.com/rpc/v1",

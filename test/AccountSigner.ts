@@ -23,7 +23,7 @@ describe("Account Signer", function () {
       console.log(await addSigner.wait());
     });
 
-    it.skip("is signer", async function () {
+    it("is signer", async function () {
       const hasAccess = await contract.hasAccountAccess(
         // "0xA61091A9f5ED26e8dE811725791a0774072355AB",
         "0xCa2Cf550a04C798456624dD05FFC4A83f28F335A",

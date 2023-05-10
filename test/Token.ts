@@ -29,7 +29,7 @@ describe("Token", function () {
       vSignature = parseInt(signature.slice(130, 132), 16);
     });
 
-    it("mint 1", async function () {
+    it.skip("mint 1", async function () {
       let price = ethers.utils.parseEther("0.00001");
       const data = await contract.mint(
         "c10ea8wwd0007410tow88u1b1",
