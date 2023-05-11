@@ -11,7 +11,13 @@ contract Recording is TokenShare, AccountSigners {
 
     event BaseURIUpdated(string uri);
 
-    constructor() ERC721("RecordingToken", "RT") {}
+    constructor(
+        address feeAcceptor,
+        uint8 feePercentage
+    ) ERC721("RecordingToken", "RT") {
+        updateFeeAcceptingAddress(feeAcceptor);
+        updateFee(feePercentage);
+    }
 
     function _baseURI() internal view override returns (string memory) {
         return baseURI;
@@ -32,14 +38,14 @@ contract Recording is TokenShare, AccountSigners {
         uint8 _v,
         bytes32 _r,
         bytes32 _s
-    ) public returns (Token memory) {
+    ) public returns (string memory) {
         // check if the id has been used
         TokenRelation memory _tokenRelation = fetchRecordingToken(id);
 
         if (_tokenRelation.used) {
             Token memory _token = fetchToken(_tokenRelation.tokenId);
             if (_token.owner == msg.sender) {
-                return _token;
+                return _token.id;
             } else {
                 revert("Token: The given id is invalid");
             }
@@ -61,7 +67,7 @@ contract Recording is TokenShare, AccountSigners {
 
         _tokenIds.increment();
 
-        return token;
+        return token.id;
     }
 
     /// @notice Fetch the room token cid allowed status.

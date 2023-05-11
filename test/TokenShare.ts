@@ -14,39 +14,39 @@ describe("Token Share", function () {
       contract = await Contract.attach(nftAddress);
     });
 
-    it.skip("buy 0", async function () {
-      // let price = ethers.utils.parseEther("2.0");
-      let price = ethers.utils.parseEther("0.00001");
+    it("buy 5", async function () {
+      // let price = ethers.utils.parseEther("0.0");
+      let price = ethers.utils.parseEther("200");
 
-      const data = await contract.buyTokenShare(4, { value: price });
+      const data = await contract.buyTokenShare(5, { value: price });
       console.log(data);
       console.log(await data.wait());
     });
 
-    it.skip("get token 0 share holder", async function () {
+    it("get token 5 share holder", async function () {
       const tokenShare = await contract.getTokenShare(
-        4,
+        5,
         wallet.address,
         // "0xA61091A9f5ED26e8dE811725791a0774072355AB",
       );
       console.log(tokenShare);
     });
-    it.skip("check token 0 share holder", async function () {
+    it("check token 5 share holder", async function () {
       const checkTokenShare = await contract.checkTokenShare(
-        4,
+        5,
         wallet.address,
         // "0xA61091A9f5ED26e8dE811725791a0774072355AB",
       );
       console.log(checkTokenShare);
     });
-    it.skip("token 3 room", async function () {
-      const room = await contract.getToken(4);
+    it("token 5 room", async function () {
+      const room = await contract.getToken(5);
       console.log({
         room,
       });
     });
-    it.skip("token 3 key ", async function () {
-      const key = await contract.tokenKey(4);
+    it("token 5 key ", async function () {
+      const key = await contract.tokenKey(5);
       console.log({
         key,
       });

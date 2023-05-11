@@ -5,6 +5,8 @@ const fetchAddress = () => {
   if (network.name === "TBSC") nftAddress = process.env.TBSC_ADDRESS ?? "";
   if (network.name === "AGOR") nftAddress = process.env.AGOR_ADDRESS ?? "";
   if (network.name === "TOKT") nftAddress = process.env.TOKT_ADDRESS ?? "";
+  if (network.name === "localhost")
+    nftAddress = process.env.LOCALHOST_ADDRESS ?? "";
 
   return nftAddress;
 };

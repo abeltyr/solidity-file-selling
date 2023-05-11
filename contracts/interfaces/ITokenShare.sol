@@ -44,9 +44,7 @@ interface ITokenShare is IToken {
 
     /// @notice buy token share
     /// @param tokenId The mint id used for the Token association.
-    function buyTokenShare(
-        uint256 tokenId
-    ) external payable returns (Token memory, TokenShareHolder memory);
+    function buyTokenShare(uint256 tokenId) external payable;
 
     /// @notice fetch a token data by the mint id
     function getToken(uint256 tokenId) external view returns (Token memory);

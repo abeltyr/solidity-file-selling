@@ -5,8 +5,9 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "./interfaces/ITokenShare.sol";
 import "./Token.sol";
+import "./TokenFee.sol";
 
-abstract contract TokenShare is ITokenShare, Token {
+abstract contract TokenShare is ITokenShare, Token, TokenFee {
     mapping(uint256 => mapping(address => TokenShareHolder))
         public _tokenShareHolders;
 
@@ -50,9 +51,7 @@ abstract contract TokenShare is ITokenShare, Token {
 
     /// @notice Registers the nft and creates a new listing.
     /// @dev Should fail if startDate is in the past. Should fail if endDate is older the startDate.
-    function buyTokenShare(
-        uint256 tokenId
-    ) external payable returns (Token memory, TokenShareHolder memory) {
+    function buyTokenShare(uint256 tokenId) external payable {
         _requireMinted(tokenId);
 
         Token memory _token = fetchToken(tokenId);
@@ -77,9 +76,19 @@ abstract contract TokenShare is ITokenShare, Token {
             !_existingTokenShareHolder.bought,
             "TokenShare: you already have access to the token"
         );
+        uint256 total = msg.value;
+        uint8 feePercentage = getFeePercentage();
+        address feeAcceptor = getFeeAcceptor();
+        uint256 fee = (msg.value / 100) * feePercentage;
+        uint256 tokenPrice = total - fee;
 
-        (bool success, ) = payable(_token.owner).call{value: msg.value}("");
-        require(success, "Transfer: fund transfer failed");
+        (bool feePassingSuccess, ) = payable(feeAcceptor).call{value: fee}("");
+        require(feePassingSuccess, "Transfer: fund transfer failed");
+
+        (bool tokenSellSuccess, ) = payable(_token.owner).call{
+            value: tokenPrice
+        }("");
+        require(tokenSellSuccess, "Transfer: fund transfer failed");
 
         uint256 buyingDate = block.timestamp;
         TokenShareHolder memory _tokenShareHolder = TokenShareHolder({
@@ -96,8 +105,6 @@ abstract contract TokenShare is ITokenShare, Token {
             tokenId: _token.tokenId,
             buyingPrice: msg.value
         });
-
-        return (_token, _tokenShareHolder);
     }
 
     /// @notice Fetch the  token.

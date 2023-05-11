@@ -20,7 +20,7 @@ describe("Token", function () {
 
       contract = await Contract.attach(nftAddress);
     });
-    it("token Contract ", async function () {
+    it("token hash ", async function () {
       hash = hashMessage(wallet.address);
       const signature = await wallet.signMessage(wallet.address);
 
@@ -30,9 +30,9 @@ describe("Token", function () {
     });
 
     it.skip("mint 1", async function () {
-      let price = ethers.utils.parseEther("0.00001");
+      let price = ethers.utils.parseEther("200");
       const data = await contract.mint(
-        "c10ea8wwd0007410tow88u1b1",
+        "cvac0popld0007410towo8ipb2",
         "wV681/FvQGysmpgCpEpuDQ0PXr9Xq/A/",
         "bafybeietsgcwfupwftwj6e2bldjzajseqjpgcpttrlvftckixwd3qhs2wm/6e5380b37ae6e745b613",
         price,
@@ -52,19 +52,19 @@ describe("Token", function () {
       const data = await contract.updateTokenSell(3, true);
       console.log(data);
     });
-    it.skip("token 3 cid ", async function () {
-      const cid = await contract.tokenURI(4);
+    it.skip("token 0 cid ", async function () {
+      const cid = await contract.tokenURI(0);
       console.log({
         cid,
       });
     });
-    it.skip("token 4 price", async function () {
-      const price = await contract.tokenPrice(4);
+    it("token 0 price", async function () {
+      const price = await contract.tokenPrice(5);
 
       console.log({ price });
     });
-    it.skip("token 4 sellingAccess", async function () {
-      const sellingAccess = await contract.tokenSelling(4);
+    it.skip("token 0 sellingAccess", async function () {
+      const sellingAccess = await contract.tokenSelling(0);
       console.log({ sellingAccess });
     });
     it.skip("mint 0", async function () {
