@@ -58,7 +58,7 @@ describe("Token", function () {
         cid,
       });
     });
-    it("token 0 price", async function () {
+    it.skip("token 0 price", async function () {
       const price = await contract.tokenPrice(5);
 
       console.log({ price });

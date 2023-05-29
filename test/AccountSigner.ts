@@ -14,21 +14,21 @@ describe("Account Signer", function () {
       contract = await Contract.attach(nftAddress);
     });
 
-    it.skip("add signer", async function () {
+    it("add signer", async function () {
       const addSigner = await contract.addAccountSigner(
         // "0xA61091A9f5ED26e8dE811725791a0774072355AB",
-        // "0xCa2Cf550a04C798456624dD05FFC4A83f28F335A",
-        "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
+        "0xCa2Cf550a04C798456624dD05FFC4A83f28F335A",
+        // "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
       );
       console.log(addSigner);
       console.log(await addSigner.wait());
     });
 
-    it.skip("is signer", async function () {
+    it("is signer", async function () {
       const hasAccess = await contract.hasAccountAccess(
         // "0xA61091A9f5ED26e8dE811725791a0774072355AB",
-        // "0xCa2Cf550a04C798456624dD05FFC4A83f28F335A",
-        "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
+        "0xCa2Cf550a04C798456624dD05FFC4A83f28F335A",
+        // "0xdD2FD4581271e230360230F9337D5c0430Bf44C0",
       );
       console.log(hasAccess);
     });

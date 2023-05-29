@@ -5,8 +5,8 @@ async function main() {
   const Contract = await ethers.getContractFactory("Recording");
   console.log("Deploying contract...");
   const contract = await Contract.deploy(
-    "0x9965507D1a55bcC2695C58ba16FB37d819B0A4dc",
-    20,
+    "0xA61091A9f5ED26e8dE811725791a0774072355AB",
+    15,
   );
   await contract.deployed();
   console.log("contract deployed to:", contract.address);
